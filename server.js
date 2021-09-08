@@ -1,10 +1,25 @@
 //Kate Allsebrook
-
 const express = require('express');
+let Airtable = require('airtable');
+const bodyParser = require('body-parser');
+
 //const model = require('./business-logic.js');
 
-//Express setup
+//Express setup + middleware
 let app = express();
+app.use(bodyParser.urlencoded({ extended: true }));
+
+Airtable.configure({
+    endpointUrl: 'https://api.airtable.com',
+    apiKey: 'key4sTLREuAduavyp'
+});
+const base = Airtable.base('app1lDw2Y6fFh8UXi');
+
+//Routes
+app.route("/add")
+	.post((req,res) => {
+		console.log(req.body)
+	})
 
 //Param Example
 /*
