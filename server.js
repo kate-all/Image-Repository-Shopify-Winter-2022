@@ -7,7 +7,8 @@ const bodyParser = require('body-parser');
 
 //Express setup + middleware
 let app = express();
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.raw())
+app.use(bodyParser.json())
 
 Airtable.configure({
     endpointUrl: 'https://api.airtable.com',
@@ -16,9 +17,10 @@ Airtable.configure({
 const base = Airtable.base('app1lDw2Y6fFh8UXi');
 
 //Routes
-app.route("/add")
+app.route("/add") //Must use x-www-form-urlencoded if testing in Postman
 	.post((req,res) => {
-		console.log(req.body)
+		res.status(200)
+		res.send(req.body)
 	})
 
 //Param Example
