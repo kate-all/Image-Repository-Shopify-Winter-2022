@@ -18,7 +18,7 @@ const base = Airtable.base('app1lDw2Y6fFh8UXi');
 //Routes
 app.route("/add")
 	.post((req,res) => {
-		model.addImages(req.body["Images"])
+		model.addImages(req.body["Images"], base)
 		res.status(200)
 		res.send("Thanks!")
 	})
