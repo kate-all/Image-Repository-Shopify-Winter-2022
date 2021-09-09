@@ -17,14 +17,14 @@ Airtable.configure({
 const base = Airtable.base('app1lDw2Y6fFh8UXi');
 
 //Routes
-app.route("/add")
+app.route("/add") //Add Multiple Images
 	.post((req,res) => {
 		model.addImages(req.body["Images"], base)
 		res.status(200)
 		res.send("Thanks!")
 	})
 
-app.route("/entries") 
+app.route("/entries") //Get all public entries/images
 	.get((req,res) => {
 		function response(output) {
 			res.send(JSON.stringify(output))
@@ -33,20 +33,21 @@ app.route("/entries")
 		model.getUploads(base,response)
 	})
 
-
-	/*
-app.route("/find") {
+app.route("/find")
 	//Image Recognition
-	.post((req,res) => {
+	/*.post((req,res) => {
 
-	})
+	})*/
 
 	//Find by name
 	.get((req,res) => {
-		res.query.name
+		function response(output) {
+			res.send(JSON.stringify(output))
+			res.status(200)
+		}
+		model.findByName(req.query.name,base,response)
 	})
-}
-*/
+
 
 //Param Example
 /*

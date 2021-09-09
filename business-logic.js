@@ -33,6 +33,7 @@ function getUploads(base, callback) {
 /*
 Returns all public entries in the database
 Params: Airtable base
+        A callback function
 Returns: All public images
 */
   entries = []
@@ -59,5 +60,42 @@ Returns: All public images
       })
 }
 
+function findByName(name,base,callback) {
+/*
+Finds and returns public image objects given their name. This is a case-sensitive search. The name
+parameter must match the Name field to be flagged as a match. All images with this name will
+be returned if they are public
+Params: The name (search key)
+        Airtable base
+        Callback function
+Returns: A list of matching image objects
+*/
+  entries = []
+  base('Images').select({
+    filterByFormula: "AND({Name} = '" + name + "',NOT({Privacy} = 'private'))"
+    }).eachPage(function page(records, fetchNextPage) {
+
+        records.forEach((record) => {
+          entries.push({
+            "name": record.get('Name'),
+            "Image": record.get("Image")[0]["url"],
+            "Privacy": record.get("Privacy")
+          })
+        });
+
+        fetchNextPage()
+      
+      }, function done(err) {
+        callback(entries)
+        if (err) {
+          console.error(err)
+        }
+        return
+      })
+
+
+
+}
+
 //Export
-module.exports = {addImages, getUploads};
+module.exports = {addImages, getUploads, findByName};
