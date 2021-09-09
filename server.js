@@ -26,13 +26,11 @@ app.route("/add")
 
 app.route("/entries") 
 	.get((req,res) => {
-		entries = []
 		function response(output) {
-			console.log(JSON.stringify(output))
 			res.send(JSON.stringify(output))
 			res.status(200)
 		}
-		model.getUploads(entries,base,response)
+		model.getUploads(base,response)
 	})
 
 

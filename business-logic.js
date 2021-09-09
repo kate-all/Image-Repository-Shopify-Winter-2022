@@ -29,19 +29,18 @@ Params: An array of JSON objects with name, url, and privacy specified
     })   
 }
 
-function getUploads(entries, base, callback) {
+function getUploads(base, callback) {
 /*
 Returns all public entries in the database
 Params: Airtable base
 Returns: All public images
 */
-
+  entries = []
   base('Images').select({
     filterByFormula: "NOT({Privacy} = 'private')"
     }).eachPage(function page(records, fetchNextPage) {
 
         records.forEach((record) => {
-          console.log('Retrieved', record.get('Name'))
           entries.push({
             "name": record.get('Name'),
             "Image": record.get("Image")[0]["url"],
@@ -60,9 +59,5 @@ Returns: All public images
       })
 }
 
-function output(entries) {
-  return JSON.stringify(entries).slice()
-}
-
 //Export
-module.exports = {addImages, getUploads, output};
+module.exports = {addImages, getUploads};
