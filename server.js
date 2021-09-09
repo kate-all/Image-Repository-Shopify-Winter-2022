@@ -9,6 +9,7 @@ let app = express();
 app.use(bodyParser.raw())
 app.use(bodyParser.json())
 
+//Authenticate Airtable
 Airtable.configure({
     endpointUrl: 'https://api.airtable.com',
     apiKey: 'key4sTLREuAduavyp'

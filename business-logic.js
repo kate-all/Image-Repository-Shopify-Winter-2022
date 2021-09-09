@@ -9,9 +9,10 @@ function addImages(imageArray,base) {
                 "Name": entry["name"],
                 "Image": [
                   {
-                    "url": entry.url
+                    "url": entry["url"]
                   }
-                ]
+                ],
+                "Privacy": entry["privacy"]
               }
             }],
              function(err, records) {
