@@ -24,6 +24,32 @@ app.route("/add")
 		res.send("Thanks!")
 	})
 
+app.route("/entries") 
+	.get((req,res) => {
+		entries = []
+		function response(output) {
+			console.log(JSON.stringify(output))
+			res.send(JSON.stringify(output))
+			res.status(200)
+		}
+		model.getUploads(entries,base,response)
+	})
+
+
+	/*
+app.route("/find") {
+	//Image Recognition
+	.post((req,res) => {
+
+	})
+
+	//Find by name
+	.get((req,res) => {
+		res.query.name
+	})
+}
+*/
+
 //Param Example
 /*
 app.route('/auth/:username/:password')

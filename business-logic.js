@@ -1,7 +1,12 @@
 //Kate Allsebrook
 
 function addImages(imageArray,base) {
-    
+/*
+Adds all given images to the database. Each image must specify
+the name, url, and privacy level.
+Params: An array of JSON objects with name, url, and privacy specified
+        The airtable base
+*/
     imageArray.forEach((entry) => {
         base('Images').create([
             {
@@ -21,10 +26,43 @@ function addImages(imageArray,base) {
               return;
             }
           });
-    })
-    
-    
+    })   
+}
+
+function getUploads(entries, base, callback) {
+/*
+Returns all public entries in the database
+Params: Airtable base
+Returns: All public images
+*/
+
+  base('Images').select({
+    filterByFormula: "NOT({Privacy} = 'private')"
+    }).eachPage(function page(records, fetchNextPage) {
+
+        records.forEach((record) => {
+          console.log('Retrieved', record.get('Name'))
+          entries.push({
+            "name": record.get('Name'),
+            "Image": record.get("Image")[0]["url"],
+            "Privacy": record.get("Privacy")
+          })
+        });
+
+        fetchNextPage()
+        
+      }, function done(err) {
+        callback(entries)
+        if (err) {
+          console.error(err)
+        }
+        return
+      })
+}
+
+function output(entries) {
+  return JSON.stringify(entries).slice()
 }
 
 //Export
-module.exports = {addImages};
+module.exports = {addImages, getUploads, output};
