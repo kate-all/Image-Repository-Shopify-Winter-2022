@@ -60,7 +60,7 @@ Returns: All public images
       })
 }
 
-function findByName(name,base,callback) {
+function findByTextKey(textKey,base,callback) {
 /*
 Finds and returns public image objects given their name. This is a case-sensitive search. The name
 parameter must match the Name field to be flagged as a match. All images with this name will
@@ -72,16 +72,20 @@ Returns: A list of matching image objects
 */
   entries = []
   base('Images').select({
-    filterByFormula: "AND({Name} = '" + name + "',NOT({Privacy} = 'private'))"
+    filterByFormula: "NOT({Privacy} = 'private')"
     }).eachPage(function page(records, fetchNextPage) {
 
         records.forEach((record) => {
-          entries.push({
-            "name": record.get('Name'),
-            "Image": record.get("Image")[0]["url"],
-            "Privacy": record.get("Privacy")
-          })
+          if (record.get('Name').includes(textKey)) {
+            entries.push({
+              "name": record.get('Name'),
+              "Image": record.get("Image")[0]["url"],
+              "Privacy": record.get("Privacy")
+            })
+          }
+
         });
+        
 
         fetchNextPage()
       
@@ -95,4 +99,4 @@ Returns: A list of matching image objects
 }
 
 //Export
-module.exports = {addImages, getUploads, findByName};
+module.exports = {addImages, getUploads, findByTextKey};

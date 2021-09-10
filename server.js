@@ -34,13 +34,13 @@ app.route("/entries") //Get all public entries/images
 	})
 
 app.route("/search")
-	//Find by name
+	//Find by text key
 	.get((req,res) => {
 		function response(output) {
 			res.send(JSON.stringify(output))
 			res.status(200)
 		}
-		model.findByName(req.query.name,base,response)
+		model.findByTextKey(req.query.text,base,response)
 	})
 
 
