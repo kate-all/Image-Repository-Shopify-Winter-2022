@@ -92,9 +92,6 @@ Returns: A list of matching image objects
         }
         return
       })
-
-
-
 }
 
 //Export

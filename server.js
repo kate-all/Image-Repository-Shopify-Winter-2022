@@ -33,12 +33,7 @@ app.route("/entries") //Get all public entries/images
 		model.getUploads(base,response)
 	})
 
-app.route("/find")
-	//Image Recognition
-	/*.post((req,res) => {
-
-	})*/
-
+app.route("/search")
 	//Find by name
 	.get((req,res) => {
 		function response(output) {
