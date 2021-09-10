@@ -41,6 +41,7 @@ Returns: All public images
     filterByFormula: "NOT({Privacy} = 'private')"
     }).eachPage(function page(records, fetchNextPage) {
 
+        //Add image object to list
         records.forEach((record) => {
           entries.push({
             "name": record.get('Name'),
@@ -75,6 +76,7 @@ Returns: A list of matching image objects
     filterByFormula: "NOT({Privacy} = 'private')"
     }).eachPage(function page(records, fetchNextPage) {
 
+        //Find entries with the keyword in its Name
         records.forEach((record) => {
           if (record.get('Name').includes(textKey)) {
             entries.push({
@@ -128,8 +130,6 @@ Params: Axios (requests module)
   .catch((err) => {
     console.log(err)
   })
-
-
 }
 
 //Export

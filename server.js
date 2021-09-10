@@ -1,4 +1,6 @@
 //Kate Allsebrook
+
+//Modules
 const express = require('express');
 let Airtable = require('airtable');
 const bodyParser = require('body-parser');
@@ -18,14 +20,16 @@ Airtable.configure({
 const base = Airtable.base('app1lDw2Y6fFh8UXi');
 
 //Routes
-app.route("/add") //Add Multiple Images
+//Add images
+app.route("/add")
 	.post((req,res) => {
 		model.addImages(req.body["Images"], base)
 		res.status(200)
-		res.send("Thanks!")
+		res.send("Added your image(s)!\nView the full database at https://airtable.com/invite/l?inviteId=invvjSR6mT2AQMzlZ&inviteToken=de5f719064923bbe95f24c27d8a3c917682f8f90c781b9944046b193270e90da&utm_source=email")
 	})
 
-app.route("/entries") //Get all public entries/images
+//Get all public entries/images
+app.route("/entries")
 	.get((req,res) => {
 		function response(output) {
 			res.send(JSON.stringify(output))
@@ -34,8 +38,8 @@ app.route("/entries") //Get all public entries/images
 		model.getUploads(base,response)
 	})
 
+//Keyword search with Name field
 app.route("/search")
-	//Find by text key
 	.get((req,res) => {
 		function response(output) {
 			res.send(JSON.stringify(output))
@@ -44,30 +48,13 @@ app.route("/search")
 		model.findByTextKey(req.query.text,base,response)
 	})
 
+//Add random plant photo
 app.route("/plant") 
 	.post((req,res) => {
 		model.plant(axios,base)
-		res.send("Planted!")
+		res.send("Planted! A random plant photo has been added to the database.\nView the full database at https://airtable.com/invite/l?inviteId=invvjSR6mT2AQMzlZ&inviteToken=de5f719064923bbe95f24c27d8a3c917682f8f90c781b9944046b193270e90da&utm_source=email")
 		res.status(200)
 	})
-
-//Param Example
-/*
-app.route('/auth/:username/:password')
-	//Sign Up
-	.post((req, res) => {
-	})
-
-	//Login
-	.get((req, res) => {
-	})
-
-//Query Example
-app.route('/games')
-	.get((req, res) => {
-		res.end(JSON.stringify(model.getGames(req.query.player, req.query.active, req.query.detail)));
-	})
-*/
 
 app.listen(3000);
 console.log("Server listening at http://localhost:3000");
