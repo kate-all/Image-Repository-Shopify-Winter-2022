@@ -65,7 +65,7 @@ function findByTextKey(textKey,base,callback) {
 Finds and returns public image objects given their name. This is a case-sensitive search. The name
 parameter must match the Name field to be flagged as a match. All images with this name will
 be returned if they are public
-Params: The name (search key)
+Params: The text (search key)
         Airtable base
         Callback function
 Returns: A list of matching image objects
@@ -98,5 +98,39 @@ Returns: A list of matching image objects
       })
 }
 
+function plant(axios,base) {
+/*
+Adds a random plant photo, with the privacy as public
+Params: Axios (requests module)
+        Airtable base
+*/
+
+  //Call Unsplash API
+  axios.get("https://api.unsplash.com/photos/random?query=plant&client_id=-5Omud4oq74Iwk0mDK0_mkpw281ZacDV2nSNim7l6do")
+  .then((res) => {
+
+    image = {"name": "",
+              "url": res.data.urls.full,
+              "privacy": "public"}
+    if (res.data.description == null) {
+      image.name = res.data.alt_description
+    }
+    else {
+      image.name = res.data.description
+    }
+
+    imageArray = [image]
+
+    //Add random plant image to database
+    addImages(imageArray,base)
+
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+
+
+}
+
 //Export
-module.exports = {addImages, getUploads, findByTextKey};
+module.exports = {addImages, getUploads, findByTextKey, plant};

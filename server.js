@@ -3,6 +3,7 @@ const express = require('express');
 let Airtable = require('airtable');
 const bodyParser = require('body-parser');
 const model = require('./business-logic.js');
+const axios = require('axios');
 
 //Express setup + middleware
 let app = express();
@@ -43,6 +44,12 @@ app.route("/search")
 		model.findByTextKey(req.query.text,base,response)
 	})
 
+app.route("/plant") 
+	.post((req,res) => {
+		model.plant(axios,base)
+		res.send("Planted!")
+		res.status(200)
+	})
 
 //Param Example
 /*
