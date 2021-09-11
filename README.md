@@ -14,6 +14,7 @@ I've created an API that is connected to an Airtable database to add images of p
 1. Navigate to the repo folder via the command line
 2. Run the following command: `node server`
 3. A message saying "Server listening at http://localhost:3000" should appear
+
 Now the server is up and running on port 3000!
 
 ## Automated Testing
