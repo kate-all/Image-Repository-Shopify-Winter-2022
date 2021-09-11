@@ -10,6 +10,21 @@ def test_add_single():
     assert response.status_code == 200
     assert response.text == "Added your image(s)!\nView the full database at https://airtable.com/invite/l?inviteId=invvjSR6mT2AQMzlZ&inviteToken=de5f719064923bbe95f24c27d8a3c917682f8f90c781b9944046b193270e90da&utm_source=email"
 
+def test_add_multiple():
+    req = {"Images": [{
+        "name": "False Aralia",
+        "url": "https://www.costafarms.com/CostaFarms/Aralia-Galaxy-Variegated-Costa-Farms-Houseplant.jpg?height=257&width=256&scale=both&crop=auto",
+        "privacy": "private"
+    },
+    {
+        "name": "Dracaena Fragrans",
+        "url": "https://tipsplants.com/sites/default/files/img/articles/mini/dracaena_fragrans_victoria_986.jpg",
+        "privacy": "public"
+    }]}
+    response = requests.post('http://localhost:3000/add', json = req)
+    assert response.status_code == 200
+    assert response.text == "Added your image(s)!\nView the full database at https://airtable.com/invite/l?inviteId=invvjSR6mT2AQMzlZ&inviteToken=de5f719064923bbe95f24c27d8a3c917682f8f90c781b9944046b193270e90da&utm_source=email"
+
 def test_entries():
     response = requests.get("http://localhost:3000/entries")
     assert response.status_code == 200
