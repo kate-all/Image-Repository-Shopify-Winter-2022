@@ -20,9 +20,10 @@ Now the server is up and running on port 3000!
 I made a python file of unit tests if you want to quickly test that everything works.
 To use:
 
-1. Download [Python](https://www.python.org/downloads/)
+1. Download [Python 3](https://www.python.org/downloads/)
 2. Open another terminal and navigate to the repo folder
-3. Run `python tests.py`(Windows) or `python3 tests.py` (Linux or MacOS)
+3. Download dependencies by running `pip3 install -r requirements.txt`
+4. Run `pytest tests.py`
 
 ## Using the API
 
@@ -48,10 +49,10 @@ The array can have as many images as you'd like!
 
 Response format:
 ```
-[{"name":"Aloe",
+[{"Name":"Aloe",
 "Image":"https://dl.airtable.com/.attachmentseaa39e7d77723af6d29acf451ac2026b/b94be48faloe-vera-white-pot_sunwand24-ss_edit.jpg",
 "Privacy":"public"},
-{"name":"Looking up",
+{"Name":"Looking up",
 "Image":"https://dl.airtable.com/.attachments796fbfe723ff64beb196af3c5dffa564/e46a7da1photo-1513836279014-a89f7a76ae86",
 "Privacy":"public"},
 ...]
@@ -71,7 +72,7 @@ GET [http](http://localhost:3000/search?text=Coffee`)
 
 Response Format:
 ```
-[{"name":"Coffee plant",
+[{"Name":"Coffee plant",
 "Image":"https://dl.airtable.com/.attachments4417e4a618535331e1e25021f2ac3181/f1287f02/Coffee-Plant-.jpg",
 "Privacy":"public"}]
 ```
@@ -88,6 +89,7 @@ View the full database [HERE](https://airtable.com/invite/l?inviteId=invvjSR6mT2
 - [Unsplash API](https://unsplash.com/developers)
 - Node.js
 - Python
+- Pytest
 
 Thank you and I hope you enjoy working with my project!
 

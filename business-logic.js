@@ -44,7 +44,7 @@ Returns: All public images
         //Add image object to list
         records.forEach((record) => {
           entries.push({
-            "name": record.get('Name'),
+            "Name": record.get('Name'),
             "Image": record.get("Image")[0]["url"],
             "Privacy": record.get("Privacy")
           })
@@ -80,7 +80,7 @@ Returns: A list of matching image objects
         records.forEach((record) => {
           if (record.get('Name').includes(textKey)) {
             entries.push({
-              "name": record.get('Name'),
+              "Name": record.get('Name'),
               "Image": record.get("Image")[0]["url"],
               "Privacy": record.get("Privacy")
             })
