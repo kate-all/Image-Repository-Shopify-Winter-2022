@@ -12,8 +12,9 @@ I've created an API that is connected to an Airtable database to add images of p
 
 ## Running it
 1. Navigate to the repo folder via the command line
-2. Run the following command: `node server`
-3. A message saying "Server listening at http://localhost:3000" should appear
+2. Install all dependencies with `npm install`
+3. Run the following command: `node server`
+4. A message saying "Server listening at http://localhost:3000" should appear
 
 Now the server is up and running on port 3000!
 
