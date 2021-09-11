@@ -68,7 +68,7 @@ NOTE: This is a case sensitive search.
 
 Sample Request:
 ```
-GET [http](http://localhost:3000/search?text=Coffee`)
+GET http://localhost:3000/search?text=Coffee`
 ```
 
 Response Format:
